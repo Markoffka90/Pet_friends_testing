@@ -1,5 +1,6 @@
 import requests
 import json
+from decorators import logger
 class PetFriends:
     def __init__(self):
        self.base_url = " https://petfriends.skillfactory.ru/"
@@ -19,6 +20,7 @@ class PetFriends:
         except json.decoder.JSONDecodeError:
             result = res.text
         return status, result
+
 
     def get_list_of_pets(self, auth_key: json, filter: str = '') -> json:
         """Метод отправляет запрос на сервер о списке всех питомцев по указанному фильтру и
@@ -71,8 +73,8 @@ class PetFriends:
         except json.decoder.JSONDecodeError:
             result = res.text
         return status, result
-
-    def update_pet_info(self, auth_key: json, pet_id: str, name: str,
+    # @logger
+    def update_pet_info(self, auth_key: str, pet_id: str, name: str,
                         animal_type: str, age: int) -> json:
         """Метод отправляет запрос на сервер о обновлении данных питомуа по указанному ID и
         возвращает статус запроса и result в формате JSON с обновлённыи данными питомца"""
@@ -83,15 +85,9 @@ class PetFriends:
             'age': age,
             'animal_type': animal_type
         }
-
         res = requests.put(self.base_url + f'api/pets/{pet_id}', headers=headers, data=data)
-        status = res.status_code
-        result = ""
-        try:
-            result = res.json()
-        except json.decoder.JSONDecodeError:
-            result = res.text
-        return status, result
+
+        return res
 
     def add_new_pet_without_photo(self, auth_key: json, name: str, animal_type: str,
                     age: str) -> json:
