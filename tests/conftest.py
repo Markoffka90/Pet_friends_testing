@@ -2,6 +2,7 @@ import pytest
 import json
 import datetime
 import  sys
+from selenium import webdriver
 
 # @pytest.fixture
 # def auth_key() -> json:
@@ -25,3 +26,15 @@ def start_end():
 
 # На платформе Windows ожидаем, что тест будет падать
 # @pytest.mark.xfail(sys.platform == "win32", reason="Ошибка в системной библиотеке")
+
+@pytest.fixture(autouse=True)
+def driver():
+   driver = webdriver.Chrome()
+
+   # Переходим на страницу авторизации
+   driver.get('https://petfriends.skillfactory.ru/login')
+
+   driver.maximize_window()
+   yield driver
+
+   driver.quit()

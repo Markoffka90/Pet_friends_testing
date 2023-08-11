@@ -33,8 +33,8 @@ minversion = pytest.mark.skipif(
 #     if 'pet' in request.function.__name__:
 #         print(f"\nЗапущен тест из сьюта Pet Friends: {request.function.__name__}")
 @pytest.mark.pets
-def test_add_new_pet_with_valid_data(auth_key, name='Marsel', animal_type='cat',
-                                     age='2', pet_photo='images/plux.jpg'):
+def test_add_new_pet_with_valid_data(auth_key, name='', animal_type='',
+                                     age='7', pet_photo='images/marsel.jpg'):
     """Проверяем что можно добавить питомца с корректными данными"""
 
     # Ключ api сохраняем в переменую auth_key

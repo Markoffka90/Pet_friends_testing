@@ -161,3 +161,4 @@ cython_debug/
 /tests/my.py
 /tests/Decor.py
 /tests/test_demo.py
+/tests/test_selenium_simple.py
